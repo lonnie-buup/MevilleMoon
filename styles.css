@@ -1,0 +1,1222 @@
+/* ==========================================
+   MEVILLE MOON | ESTILOS GENERALES
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #081321;
+    color: #f0f5fc;
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    min-height: 75px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0b1b2e;
+    border-bottom: 1px solid #20344b;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.orbit {
+    color: #68b9ed;
+    margin-right: 8px;
+}
+
+nav {
+    display: flex;
+    gap: 24px;
+}
+
+nav a {
+    color: #aebed0;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+nav a:hover {
+    color: #72c7ff;
+}
+
+.status {
+    color: #70d8a3;
+    font-size: 11px;
+}
+
+.hero {
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    padding: 70px 10%;
+    background:
+        linear-gradient(90deg, #081321 15%, rgba(8,19,33,.75)),
+        url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa")
+        center/cover;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.eyebrow {
+    color: #67baf0;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 22px;
+}
+
+h1 {
+    font-size: clamp(38px, 6vw, 65px);
+    line-height: 1.1;
+    margin-bottom: 22px;
+}
+
+h1 span {
+    display: block;
+    color: #70bdf0;
+}
+
+.description {
+    color: #b5c4d6;
+    line-height: 1.8;
+    max-width: 550px;
+    margin-bottom: 30px;
+}
+
+.main-button {
+    display: inline-block;
+    padding: 15px 23px;
+    background: #2679b5;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.main-button:hover {
+    background: #3598dc;
+}
+
+/* ==========================================
+   SECCIONES
+========================================== */
+
+.section {
+    padding: 75px 8%;
+}
+
+.section h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.section-description {
+    color: #9fb0c4;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+/* ==========================================
+   VISUALIZADOR LUNAR 3D
+========================================== */
+
+.moon-container {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    background: radial-gradient(circle, #172d45, #07111f 75%);
+    border: 1px solid #29445e;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 45px;
+}
+
+#moon-viewer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#moon-viewer canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    touch-action: none;
+}
+
+#moon-viewer canvas:active {
+    cursor: grabbing;
+}
+
+.moon-label {
+    position: absolute;
+    z-index: 5;
+    top: 20px;
+    left: 20px;
+    color: #b9dafa;
+    font-size: 11px;
+    letter-spacing: 2px;
+    pointer-events: none;
+}
+
+.live-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: #70d8a3;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.moon-controls {
+    position: absolute;
+    z-index: 6;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+}
+
+.moon-controls button {
+    background: #173c5d;
+    border: 1px solid #4d83a9;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.moon-controls button:hover {
+    background: #2679b5;
+}
+
+/* ==========================================
+   SITIOS LUNARES
+========================================== */
+
+.sites {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.site-card {
+    background: #10243a;
+    border: 1px solid #263e56;
+    border-radius: 9px;
+    padding: 28px;
+    transition: transform .25s, border-color .25s;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-card:hover {
+    transform: translateY(-5px);
+    border-color: #68b9ed;
+}
+
+.site-number {
+    color: #68b9ed;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.site-card h3 {
+    font-size: 23px;
+    margin: 18px 0 10px;
+}
+
+.site-card p {
+    color: #aebed0;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.site-card p strong {
+    color: #d1deeb;
+}
+
+.site-card button {
+    background: #1d527e;
+    color: white;
+    padding: 11px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.site-card button:hover {
+    background: #2679b5;
+}
+
+.selection {
+    margin-top: 25px;
+    padding: 22px;
+    background: #10243a;
+    border-left: 3px solid #68b9ed;
+    color: #b9dafa;
+    border-radius: 4px;
+}
+
+.site-nasa-overview {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(250px, 1fr);
+    gap: 24px;
+    align-items: center;
+    margin: 24px 0;
+    padding: 22px;
+    background: #101f31;
+    border: 1px solid #29445e;
+    border-radius: 9px;
+    color: #c3d5e5;
+    line-height: 1.7;
+}
+
+.site-nasa-overview h3 {
+    color: #48c9ff;
+}
+
+.site-nasa-overview figure {
+    margin: 0;
+}
+
+.site-nasa-overview img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #42627e;
+    border-radius: 7px;
+}
+
+.site-nasa-overview figcaption,
+.site-nasa-sources {
+    color: #aebed0;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.site-nasa-overview a,
+.site-nasa-sources a {
+    color: #70d8a3;
+}
+
+.site-nasa-sources {
+    margin-top: 16px;
+}
+
+.site-card .site-nasa-sources {
+    margin: 16px 0 0;
+}
+
+.selection h2 {
+    margin: 12px 0;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.result-card {
+    background: #152a40;
+    padding: 18px;
+    border-radius: 6px;
+}
+
+.result-card p {
+    margin-top: 10px;
+    color: #aebed0;
+    font-size: 13px;
+}
+
+.Data-status {
+    color: #70d8a3;
+    font-size: 11px;
+    margin-top: 15px;
+}
+
+/* ==========================================
+   VARIABLES CIENTIFICAS
+========================================== */
+
+.analysis {
+    background: #0d1c2d;
+}
+
+.variables {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.variables div {
+    background: #152a40;
+    padding: 25px;
+    border-radius: 8px;
+}
+
+.variables h3 {
+    margin: 15px 0;
+}
+
+.variables p {
+    color: #aebed0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ==========================================
+   PANEL TOPOGRAFICO
+========================================== */
+
+#topografia-panel {
+    background: #0a1828;
+}
+
+.topografia-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.topografia-controls label {
+    color: #b9dafa;
+    font-size: 14px;
+}
+
+#topografia-site,
+#cargar-topografia {
+    padding: 12px 15px;
+    border-radius: 7px;
+    border: 1px solid #42627e;
+    font-size: 14px;
+}
+
+#topografia-site {
+    background: #17283b;
+    color: white;
+}
+
+#cargar-topografia {
+    background: #168fc2;
+    color: white;
+    cursor: pointer;
+}
+
+#cargar-topografia:hover {
+    background: #27a8dc;
+}
+
+#cargar-topografia:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+#topografia-result {
+    margin-top: 20px;
+    padding: 22px;
+    background: #101f31;
+    border: 1px solid #29445e;
+    border-radius: 10px;
+    overflow-wrap: anywhere;
+    line-height: 1.7;
+}
+
+.topografia-card h3 {
+    color: #48c9ff;
+    font-size: 24px;
+}
+
+.topografia-card h4 {
+    margin-top: 28px;
+    margin-bottom: 12px;
+    color: #ffc857;
+    letter-spacing: 1px;
+}
+
+.topografia-card p {
+    color: #d1deeb;
+    font-size: 14px;
+    margin: 7px 0;
+}
+
+.topografia-codigo {
+    color: #9bb8d0 !important;
+    font-size: 12px !important;
+}
+
+.topografia-nota {
+    margin-top: 22px !important;
+    padding-top: 14px;
+    border-top: 1px solid #42627e;
+    color: #a9bfd2 !important;
+    font-size: 12px !important;
+}
+
+.mapa-raster {
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    margin: 18px auto;
+    background: #071321;
+    border: 1px solid #42627e;
+    border-radius: 8px;
+    image-rendering: pixelated;
+}
+
+.leyenda {
+    display: flex;
+    justify-content: space-between;
+    max-width: 650px;
+    margin: 8px auto 20px;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 12px;
+}
+
+.elevacion-leyenda {
+    background: linear-gradient(
+        90deg,
+        #0a1950,
+        #1469aa,
+        #41bec3,
+        #dcbf78,
+        #fff5dc
+    );
+}
+
+.pendiente-leyenda {
+    background: linear-gradient(
+        90deg,
+        #14915f,
+        #96be41,
+        #f5be2d,
+        #e15a23,
+        #91232d
+    );
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer {
+    padding: 28px;
+    text-align: center;
+    color: #8396ab;
+    font-size: 11px;
+    border-top: 1px solid #20344b;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    nav {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .status {
+        display: none;
+    }
+
+    .sites,
+    .variables,
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site-nasa-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .moon-container {
+        height: 350px;
+    }
+
+    .section {
+        padding: 50px 6%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .moon-controls {
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .moon-controls button {
+        padding: 9px;
+        font-size: 11px;
+    }
+
+    .topografia-controls {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #topografia-site,
+    #cargar-topografia {
+        width: 100%;
+    }
+}
+/* ==========================================
+   ANALISIS AVANZADO MEVILLE MOON
+========================================== */
+
+.metricas-avanzadas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.metrica {
+    background: #172d43;
+    border: 1px solid #34516c;
+    border-radius: 9px;
+    padding: 20px;
+}
+
+.metrica span,
+.metrica small {
+    display: block;
+    color: #a9bfd2;
+    font-size: 12px;
+}
+
+.metrica strong {
+    display: block;
+    color: #48c9ff;
+    font-size: 25px;
+    margin: 12px 0;
+}
+
+@media (max-width: 700px) {
+    .metricas-avanzadas {
+        grid-template-columns: 1fr;
+    }
+}
+/* ==========================================
+   CONSULTA PUNTUAL MEVILLE MOON
+========================================== */
+
+#consulta-pendiente {
+    margin: 20px auto;
+    max-width: 650px;
+    padding: 20px;
+    background: #10243a;
+    border: 1px solid #34516c;
+    border-left: 4px solid #48c9ff;
+    border-radius: 8px;
+    color: #d1deeb;
+    line-height: 1.8;
+}
+
+.consulta-card h3 {
+    color: #48c9ff;
+    margin: 12px 0;
+}
+
+.consulta-valor {
+    margin: 18px 0;
+    padding: 18px;
+    background: #172d43;
+    border-radius: 8px;
+}
+
+.consulta-valor span {
+    display: block;
+    font-size: 11px;
+    color: #9bb8d0;
+    letter-spacing: 2px;
+}
+
+.consulta-valor strong {
+    display: block;
+    font-size: 32px;
+    color: #48c9ff;
+    margin-top: 8px;
+}/* ==========================================
+   CONSULTAS PUNTUALES DEL TERRENO
+========================================== */
+
+.consulta-panel {
+    margin: 18px auto 22px;
+    max-width: 650px;
+    padding: 20px;
+    background: #132b40;
+    border: 1px solid #315674;
+    border-radius: 9px;
+    color: #d1deeb;
+    line-height: 1.7;
+}
+
+.consulta-card {
+    border-left: 4px solid #35c9ff;
+    padding: 10px 15px;
+}
+
+.consulta-card h3 {
+    color: #35c9ff;
+    margin: 12px 0;
+    font-size: 19px;
+}
+
+.consulta-card p {
+    margin: 8px 0;
+    color: #c3d5e5;
+}
+
+.consulta-valor {
+    margin: 18px 0;
+    padding: 20px;
+    background: #193a55;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.consulta-valor span {
+    color: #a9c9df;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.consulta-valor strong {
+    color: #35c9ff;
+    font-size: 30px;
+}
+
+.metricas-avanzadas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.metrica {
+    padding: 20px;
+    background: #152a40;
+    border: 1px solid #29445e;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.metrica span {
+    color: #b9dafa;
+    font-size: 13px;
+}
+
+.metrica strong {
+    color: #35c9ff;
+    font-size: 25px;
+}
+
+.metrica small {
+    color: #9fb0c4;
+}
+
+.distribucion-iluminacion {
+    margin: 18px 0 24px;
+    padding: 18px;
+    background: #10243a;
+    border: 1px solid #29445e;
+    border-radius: 9px;
+}
+
+.grafica-iluminacion {
+    width: 100%;
+}
+
+.grafica-iluminacion svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.grafica-grid {
+    stroke: rgba(255, 255, 255, 0.12);
+    stroke-width: 1;
+}
+
+.grafica-etiqueta {
+    fill: #a9bfd2;
+    font: 12px Arial, sans-serif;
+}
+
+.grafica-area {
+    fill: rgba(53, 201, 255, 0.14);
+}
+
+.grafica-linea {
+    fill: none;
+    stroke: #35c9ff;
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.distribucion-iluminacion figcaption {
+    margin-top: 8px;
+    color: #a9bfd2;
+    font-size: 13px;
+    text-align: center;
+}
+
+.modulo-iluminacion {
+    padding: 75px 8%;
+}
+
+.modulo-iluminacion .modulo-header {
+    max-width: 760px;
+    margin-bottom: 28px;
+}
+
+.modulo-iluminacion .modulo-header h2 {
+    margin-bottom: 14px;
+    font-size: 32px;
+}
+
+.modulo-iluminacion .modulo-header > p:last-child {
+    color: #9fb0c4;
+    line-height: 1.7;
+}
+
+.iluminacion-controles {
+    display: grid;
+    grid-template-columns: minmax(130px, 1fr) minmax(160px, 1.2fr) minmax(120px, 1fr) minmax(160px, 1.2fr) auto auto;
+    align-items: end;
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.iluminacion-controles label {
+    color: #b9dafa;
+    font-size: 13px;
+}
+
+.iluminacion-controles select,
+.iluminacion-controles input,
+.iluminacion-controles button {
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid #34516c;
+    border-radius: 6px;
+    background: #132b40;
+    color: #f0f5fc;
+    font: inherit;
+}
+
+.iluminacion-controles button {
+    background: #2679b5;
+    border-color: #2679b5;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.iluminacion-controles button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.iluminacion-controles #exportar-iluminacion-pdf {
+    background: transparent;
+    border-color: #35c9ff;
+    color: #9fdcff;
+}
+
+.iluminacion-controles #exportar-iluminacion-pdf:disabled {
+    border-color: #34516c;
+    color: #9fb0c4;
+}
+
+.iluminacion-estadisticas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin: 22px 0;
+}
+
+.modulo-iluminacion > h3 {
+    margin: 28px 0 12px;
+}
+
+.tabla-iluminacion-contenedor {
+    margin: 18px 0;
+    overflow-x: auto;
+    border: 1px solid #29445e;
+    border-radius: 8px;
+}
+
+.tabla-iluminacion {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabla-iluminacion caption {
+    padding: 14px;
+    color: #d1deeb;
+    font-weight: bold;
+    text-align: left;
+}
+
+.tabla-iluminacion th,
+.tabla-iluminacion td {
+    padding: 11px 14px;
+    border-top: 1px solid #29445e;
+    color: #d1deeb;
+    white-space: nowrap;
+}
+
+.tabla-iluminacion th {
+    background: #132b40;
+    color: #a9bfd2;
+}
+
+.tabla-iluminacion tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.iluminacion-registros {
+    margin: 18px 0;
+}
+
+.iluminacion-registros summary {
+    color: #9fdcff;
+    cursor: pointer;
+    padding: 10px 0;
+}
+
+.iluminacion-registros[open] .tabla-iluminacion-contenedor {
+    max-height: 480px;
+    overflow: auto;
+}
+
+#fuente-iluminacion {
+    color: #9fb0c4;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+@media (max-width: 800px) {
+    .iluminacion-controles {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .iluminacion-controles button {
+        grid-column: 1 / -1;
+    }
+
+    .iluminacion-estadisticas {
+        grid-template-columns: 1fr;
+    }
+
+    .metricas-avanzadas {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 15mm;
+    }
+
+    body.imprimir-iluminacion {
+        background: #fff !important;
+        color: #111 !important;
+        font-family: Arial, sans-serif;
+    }
+
+    body.imprimir-iluminacion > :not(main),
+    body.imprimir-iluminacion main > :not(#explorador),
+    body.imprimir-iluminacion #explorador > :not(#modulo-iluminacion) {
+        display: none !important;
+    }
+
+    body.imprimir-iluminacion main {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body.imprimir-iluminacion #explorador {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body.imprimir-iluminacion #modulo-iluminacion {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #111 !important;
+    }
+
+    body.imprimir-iluminacion .iluminacion-controles,
+    body.imprimir-iluminacion .iluminacion-registros {
+        display: none !important;
+    }
+
+    body.imprimir-iluminacion .modulo-header .eyebrow,
+    body.imprimir-iluminacion #fuente-iluminacion {
+        color: #333 !important;
+    }
+
+    body.imprimir-iluminacion .modulo-header h2,
+    body.imprimir-iluminacion #modulo-iluminacion > h3,
+    body.imprimir-iluminacion .consulta-panel,
+    body.imprimir-iluminacion .metrica,
+    body.imprimir-iluminacion .distribucion-iluminacion {
+        background: #fff !important;
+        color: #111 !important;
+        border-color: #bbb !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    body.imprimir-iluminacion .modulo-header > p:last-child,
+    body.imprimir-iluminacion .metrica span,
+    body.imprimir-iluminacion #fuente-iluminacion,
+    body.imprimir-iluminacion .distribucion-iluminacion figcaption {
+        color: #333 !important;
+    }
+
+    body.imprimir-iluminacion .metrica strong {
+        color: #075985 !important;
+    }
+
+    body.imprimir-iluminacion .grafica-grid {
+        stroke: #ccc !important;
+    }
+
+    body.imprimir-iluminacion .grafica-etiqueta {
+        fill: #333 !important;
+    }
+
+    body.imprimir-iluminacion .grafica-linea {
+        stroke: #075985 !important;
+    }
+
+    body.imprimir-iluminacion .grafica-area {
+        fill: rgba(3, 105, 161, 0.14) !important;
+    }
+}
+/* ==========================================
+   SELECCION REGIONAL INTERACTIVA
+========================================== */
+
+.mapa-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 650px;
+    margin: 18px auto;
+    line-height: 0;
+}
+
+.mapa-wrapper .mapa-raster {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+.seleccion-capa {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.instruccion-region {
+    text-align: center;
+    color: #48c9ff;
+    margin: 18px 0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.limpiar-region {
+    display: block;
+    margin: 12px auto;
+    padding: 11px 20px;
+    background: #173c5d;
+    color: white;
+    border: 1px solid #48c9ff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.limpiar-region:hover {
+    background: #2679b5;
+}
+
+.region-result h3 {
+    color: #48c9ff;
+    margin: 12px 0;
+}
+
+.region-result h4 {
+    color: #ffc857;
+    margin: 22px 0 12px;
+}
+
+.region-result p {
+    margin: 9px 0;
+    line-height: 1.6;
+}
+
+.topografia-seguridad-nota {
+    max-width: 900px;
+    margin: -10px 0 22px;
+    padding: 14px 18px;
+    background: #152a40;
+    border-left: 3px solid #ffc857;
+    border-radius: 5px;
+    color: #c3d5e5;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.topografia-feature-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 18px;
+    margin: 10px 0 16px;
+    color: #b9dafa;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.topografia-feature-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.topografia-feature-legend i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #071321;
+    border-radius: 50%;
+}
+
+.feature-depression {
+    background: #35c9ff;
+}
+
+.feature-obstacle {
+    background: #ff8178;
+}
+
+.fuentes-intro {
+    max-width: 850px;
+    margin-bottom: 28px;
+    color: #9fb0c4;
+    line-height: 1.7;
+}
+
+.fuentes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 18px;
+}
+
+.fuentes-card {
+    min-width: 0;
+    padding: 22px;
+    background: #10243a;
+    border: 1px solid #29445e;
+    border-radius: 9px;
+}
+
+.fuentes-card h3 {
+    margin-bottom: 12px;
+    color: #b9dafa;
+    line-height: 1.4;
+}
+
+.fuentes-card p,
+.fuentes-card li {
+    color: #c3d5e5;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.fuentes-card ul {
+    padding-left: 20px;
+    margin: 12px 0;
+}
+
+.fuentes-card a,
+.fuentes-card summary {
+    color: #72c7ff;
+}
+
+.fuentes-card a:hover {
+    color: #b9e5ff;
+}
+
+.fuentes-card summary {
+    margin: 12px 0 6px;
+    cursor: pointer;
+    line-height: 1.6;
+}
+
+.fuentes-card details ul {
+    margin-top: 6px;
+}
+
+.fuentes-card code {
+    color: #e0efff;
+    overflow-wrap: anywhere;
+}

@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MEVILLE MOON | Lunar Site Explorer</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="comunicacion.css">
+    <link rel="stylesheet" href="seleccion.css">
+</head>
+
+<body>
+
+<!-- ==========================================
+     1. BARRA DE NAVEGACIÓN
+========================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <span class="orbit">◉</span> MEVILLE MOON
+    </div>
+
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#explorador">Explorador</a>
+        <a href="#analisis">Análisis</a>
+        <a href="#comunicacion">Comunicación</a>
+        <a href="#topografia-panel">Terreno</a>
+        <a href="#motor-seleccion">Selección</a>
+    </nav>
+
+    <span class="status">
+        ● SISTEMA ACTIVO
+    </span>
+
+</header>
+
+
+<main id="inicio">
+
+    <!-- ==========================================
+         2. PORTADA
+    ========================================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="eyebrow">
+                LUNAR LANDING SITE INTELLIGENCE
+            </p>
+
+            <h1>
+                Explorando el futuro
+                <span>de la Luna.</span>
+            </h1>
+
+            <p class="description">
+                Plataforma de análisis y comparación de posibles
+                sitios de alunizaje mediante información científica,
+                topografía y visualización tridimensional.
+            </p>
+
+            <a href="#explorador" class="main-button">
+                EXPLORAR LA LUNA →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         3. EXPLORADOR LUNAR
+    ========================================== -->
+
+    <section id="explorador" class="section">
+
+        <p class="eyebrow">
+            01 / LUNAR EXPLORER
+        </p>
+
+        <h2>Visualizador lunar 3D</h2>
+
+        <p class="section-description">
+            Explora la superficie lunar, gira el modelo y selecciona
+            los posibles lugares de alunizaje.
+        </p>
+
+
+        <!-- VISUALIZADOR 3D -->
+
+        <div class="moon-container">
+
+            <div class="moon-label">
+
+                <span class="live-dot"></span>
+
+                LUNAR SURFACE / 3D VIEW
+
+            </div>
+
+            <div id="moon-viewer"></div>
+
+            <div class="moon-controls">
+
+                <button id="zoom-in">＋</button>
+
+                <button id="zoom-out">－</button>
+
+                <button id="reset-moon">
+                    REINICIAR
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             4. ANÁLISIS TOPOGRÁFICO
+             ÚNICO MÓDULO
+        ========================================== -->
+
+        <section id="topografia-panel" class="section">
+
+            <p class="eyebrow">
+                04 / TERRAIN & GEOGRAPHIC SAFETY
+            </p>
+
+            <h2>Análisis de terreno y seguridad geográfica</h2>
+
+            <p class="section-description">
+                Mapas de elevación y pendiente del polo sur lunar
+                (Lunar south pole elevation and slope maps). Evalúa
+                diferencias de altura, rugosidad, posibles obstáculos
+                e incertidumbre de los DEM regionales derivados de datos NASA/LOLA.
+            </p>
+
+            <p class="topografia-seguridad-nota">
+                Selecciona un sitio y analiza el mapa de elevación; después,
+                arrastra sobre una región para revisar sus pendientes,
+                rugosidad y candidatos de relieve. Es una evaluación
+                topográfica preliminar, no una certificación de seguridad
+                para alunizaje. Para cargar los GeoTIFF, inicia el sitio con
+                <strong>iniciar_programa.bat</strong>; no abras este archivo HTML directamente.
+            </p>
+
+
+            <div class="topografia-controls">
+
+                <label for="topografia-site">
+                    Seleccionar región:
+                </label>
+
+                <select id="topografia-site">
+
+                    <option value="shackleton">
+                        Shackleton Rim
+                    </option>
+
+                    <option value="malapert">
+                        Malapert Massif
+                    </option>
+
+                    <option value="degerlache">
+                        De Gerlache Rim
+                    </option>
+
+                </select>
+
+
+                <button id="cargar-topografia">
+                    Analizar topografía
+                </button>
+
+            </div>
+
+
+            <!-- RESULTADOS DINÁMICOS -->
+
+            <div
+                id="topografia-result"
+                aria-live="polite"
+            >
+
+                Selecciona una región y pulsa Analizar topografía.
+
+            </div>
+
+        </section>
+
+<!-- ==================================================
+     MEVILLE MOON | MODULO 2
+     SIMULADOR DE ILUMINACION SOLAR
+================================================== -->
+
+<section id="modulo-iluminacion" class="modulo-iluminacion">
+
+    <div class="modulo-header">
+        <p class="eyebrow">MEVILLE MOON / SPICE + NASA LOLA</p>
+        <h2>Simulador de iluminación solar</h2>
+        <p>
+            Evolución de la iluminación durante un ciclo lunar completo,
+            combinando efemérides SPICE con el relieve de los DEM regionales NASA/LOLA.
+        </p>
+    </div>
+
+    <div class="iluminacion-controles">
+
+        <label for="iluminacion-site">
+            Sitio de análisis
+        </label>
+
+        <select id="iluminacion-site">
+            <option value="shackleton">Shackleton Rim</option>
+            <option value="degerlache">De Gerlache Rim</option>
+            <option value="malapert">Malapert Massif</option>
+        </select>
+
+        <label for="iluminacion-fecha">
+            Fecha de inicio (UTC)
+        </label>
+
+        <input
+            type="date"
+            id="iluminacion-fecha"
+            min="2026-01-01"
+            max="2030-12-31"
+            value="2026-11-14"
+        >
+
+        <button id="calcular-iluminacion">
+            Consultar iluminación
+        </button>
+
+        <button id="exportar-iluminacion-pdf" type="button" disabled>
+            Exportar a PDF
+        </button>
+
+    </div>
+
+    <div id="iluminacion-resultado"
+         class="consulta-panel">
+
+        <p>
+            Selecciona un sitio y una fecha para
+            consultar sus condiciones de iluminación.
+        </p>
+
+    </div>
+
+    <div class="iluminacion-estadisticas">
+
+        <div class="metrica">
+            <span>Intervalo con Sol directo</span>
+            <strong id="porcentaje-iluminacion">--</strong>
+        </div>
+
+        <div class="metrica">
+            <span>Horas con Sol directo</span>
+            <strong id="tiempo-iluminado">--</strong>
+        </div>
+
+        <div class="metrica">
+            <span>Horas en sombra</span>
+            <strong id="tiempo-sombra">--</strong>
+        </div>
+
+    </div>
+
+    <h3>Distribución temporal</h3>
+
+    <figure class="distribucion-iluminacion">
+        <div id="grafica-solar" class="grafica-iluminacion" aria-live="polite"></div>
+        <figcaption>
+            Sol directo (100%) o sombra (0%) en muestras cada 30 minutos, durante el ciclo lunar.
+        </figcaption>
+    </figure>
+
+    <details class="iluminacion-registros">
+        <summary id="tabla-iluminacion-resumen">Ver detalle de las muestras horarias</summary>
+        <div class="tabla-iluminacion-contenedor">
+            <table class="tabla-iluminacion">
+                <caption>Sol y horizonte topográfico por muestra (UTC)</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha y hora UTC</th>
+                        <th scope="col">Elevación solar</th>
+                        <th scope="col">Horizonte topográfico</th>
+                        <th scope="col">Azimut solar</th>
+                        <th scope="col">Condición</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-iluminacion"></tbody>
+            </table>
+        </div>
+    </details>
+
+    <div id="fuente-iluminacion">
+        <p>
+            Efemérides solares DE440s mediante SPICE y horizonte calculado desde
+            el DEM regional NASA/LOLA de 5 m/píxel, dentro de 7,5 km del sitio. El resultado
+            considera el Sol como fuente puntual, no modela su disco ni sombras
+            más allá de la cobertura del DEM.
+        </p>
+    </div>
+
+</section>
+
+        <section id="comunicacion" class="section comunicacion-section">
+            <p class="eyebrow">05 / SPICE + NASA LOLA</p>
+            <h2>Simulador de comunicación Tierra–Luna</h2>
+            <p class="section-description">
+                Calcula la elevación aparente del centro de la Tierra y sus ventanas
+                de visibilidad geométrica con efemérides SPICE y el horizonte del
+                DEM regional NASA/LOLA del sitio.
+            </p>
+
+            <form id="comunicacion-form" class="comunicacion-controls">
+                <label for="comunicacion-site">Región de análisis</label>
+                <select id="comunicacion-site" name="site">
+                    <option value="shackleton">Shackleton Rim</option>
+                    <option value="degerlache">De Gerlache Rim</option>
+                    <option value="malapert">Malapert Massif</option>
+                </select>
+
+                <label for="comunicacion-lat">Latitud lunar (°)</label>
+                <input id="comunicacion-lat" name="latitude" type="number"
+                    min="-90" max="90" step="0.0001" required>
+
+                <label for="comunicacion-lon">Longitud lunar (°)</label>
+                <input id="comunicacion-lon" name="longitude" type="number"
+                    min="-180" max="180" step="0.0001" required>
+
+                <label for="comunicacion-antena">Altura de antena sobre el terreno (m)</label>
+                <input id="comunicacion-antena" name="antennaHeight" type="number"
+                    min="0" max="1000" step="0.1" value="2" required>
+
+                <label for="comunicacion-inicio">Inicio de análisis (UTC)</label>
+                <input id="comunicacion-inicio" name="startUtc" type="datetime-local" required>
+
+                <label for="comunicacion-dias">Duración (días)</label>
+                <input id="comunicacion-dias" name="durationDays" type="number"
+                    min="1" max="30" step="1" value="7" required>
+
+                <label for="comunicacion-paso">Paso temporal (minutos)</label>
+                <select id="comunicacion-paso" name="stepMinutes">
+                    <option value="10">10 minutos</option>
+                    <option value="30" selected>30 minutos</option>
+                    <option value="60">60 minutos</option>
+                    <option value="120">120 minutos</option>
+                </select>
+
+                <button id="calcular-comunicacion" type="submit">
+                    Calcular visibilidad
+                </button>
+            </form>
+
+            <p id="comunicacion-estado" class="comunicacion-status" role="status" aria-live="polite">
+                Cargando estado de kernels SPICE…
+            </p>
+
+            <div id="comunicacion-resultado" class="comunicacion-result" aria-live="polite">
+                <p>Selecciona un punto y calcula sus ventanas de comunicación.</p>
+            </div>
+
+            <section class="comunicacion-comparacion" aria-labelledby="comparacion-comunicacion-titulo">
+                <h3 id="comparacion-comunicacion-titulo">Comparación de ventanas</h3>
+                <div id="comunicacion-comparacion">
+                    <p>La comparación aparecerá después del análisis.</p>
+                </div>
+            </section>
+
+            <p class="comunicacion-caveat">
+                La visibilidad geométrica no garantiza una conexión de radio perfecta:
+                la interferencia, las reflexiones del terreno, la potencia, la antena
+                y otros factores también afectan el enlace. El cálculo usa el centro
+                de la Tierra como línea de mira y el DEM regional NASA/LOLA (radio
+                de horizonte de 7,5 km); fuera de esa cobertura no extrapola el relieve.
+            </p>
+        </section>
+
+        <!-- ==========================================
+             5. SITIOS DE EXPLORACIÓN
+        ========================================== -->
+
+        <h2>Sitios de exploración</h2>
+
+        <p class="section-description">
+            Consulta qué publicó NASA sobre las regiones del polo sur lunar y
+            cómo se relacionan con los puntos de referencia usados en este modelo.
+        </p>
+
+        <div class="site-nasa-overview">
+            <div>
+                <h3>Regiones candidatas Artemis III</h3>
+                <p>
+                    En 2022, NASA anunció 13 regiones candidatas cerca del polo sur.
+                    Cada región abarca aproximadamente 15 × 15 km y puede contener
+                    varios lugares potenciales de aterrizaje; no equivale a un punto
+                    de aterrizaje ya elegido.
+                </p>
+                <p>
+                    En 2024, NASA publicó una lista refinada de nueve regiones
+                    potenciales. Su evaluación utilizó datos del Lunar Reconnaissance
+                    Orbiter y consideró valor científico, ventanas de lanzamiento,
+                    terreno, comunicación con la Tierra e iluminación. La selección
+                    de un lugar específico requiere estudios posteriores.
+                </p>
+                <p class="site-nasa-sources">
+                    Fuentes oficiales:
+                    <a href="https://www.nasa.gov/news-release/la-nasa-identifica-regiones-candidatas-para-un-alunizaje-humano/"
+                        target="_blank" rel="noopener noreferrer">anuncio NASA 2022</a>
+                    ·
+                    <a href="https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
+                        target="_blank" rel="noopener noreferrer">actualización NASA 2024</a>
+                </p>
+            </div>
+            <figure>
+                <a href="https://www.nasa.gov/wp-content/uploads/2024/10/artemis-iii-landing-region-candidates.jpg"
+                    target="_blank" rel="noopener noreferrer">
+                    <img src="https://www.nasa.gov/wp-content/uploads/2024/10/artemis-iii-landing-region-candidates.jpg?w=1430"
+                        alt="Mapa de NASA con nueve regiones candidatas para Artemis III cerca del polo sur lunar"
+                        loading="lazy">
+                </a>
+                <figcaption>
+                    Mapa de las nueve regiones potenciales publicado por NASA en 2024.
+                    Crédito: NASA.
+                </figcaption>
+            </figure>
+        </div>
+
+        <div class="sites">
+
+
+            <!-- SHACKLETON -->
+
+            <article class="site-card">
+
+                <div class="site-number">
+                    SITE 01
+                </div>
+
+                <h3>Shackleton</h3>
+
+                <p>
+                    <strong>Nombre del modelo:</strong> Shackleton Rim.
+                </p>
+                <p>
+                    <strong>Región NASA (2022):</strong> Pico cerca de Shackleton
+                    (Peak near Shackleton).
+                </p>
+                <p>
+                    <strong>Lista refinada NASA (2024):</strong> No aparece entre
+                    las nueve regiones potenciales anunciadas.
+                </p>
+
+                <button data-site="Shackleton">
+                    Seleccionar sitio
+                </button>
+
+            </article>
+
+
+            <!-- MALAPERT -->
+
+            <article class="site-card">
+
+                <div class="site-number">
+                    SITE 02
+                </div>
+
+                <h3>Malapert</h3>
+
+                <p>
+                    <strong>Nombre NASA:</strong> Macizo de Malapert
+                    (Malapert Massif).
+                </p>
+                <p>
+                    <strong>Lista refinada NASA (2024):</strong> Incluida entre
+                    las nueve regiones potenciales para Artemis III.
+                </p>
+
+                <button data-site="Malapert">
+                    Seleccionar sitio
+                </button>
+
+            </article>
+
+
+            <!-- DE GERLACHE -->
+
+            <article class="site-card">
+
+                <div class="site-number">
+                    SITE 03
+                </div>
+
+                <h3>De Gerlache</h3>
+
+                <p>
+                    <strong>Nombre NASA:</strong> Borde de Gerlache 1
+                    (de Gerlache Rim 1).
+                </p>
+                <p>
+                    <strong>Lista refinada NASA (2024):</strong> No aparece entre
+                    las nueve regiones potenciales anunciadas.
+                </p>
+
+                <button data-site="De Gerlache">
+                    Seleccionar sitio
+                </button>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- RESULTADO DE SELECCIÓN -->
+
+        <div
+            id="selection"
+            class="selection"
+            aria-live="polite"
+        >
+
+            Ningún sitio seleccionado.
+
+        </div>
+
+        <section id="motor-seleccion" class="section seleccion-section">
+            <p class="eyebrow">06 / INTELLIGENT SITE SELECTION</p>
+            <h2>Motor inteligente de selección</h2>
+            <p class="section-description">
+                Ajusta la importancia de cada criterio para comparar Shackleton,
+                De Gerlache y Malapert. Las calificaciones explican qué aportó
+                cada indicador al resultado.
+            </p>
+
+            <div class="seleccion-presets" aria-label="Perfiles de ponderación">
+                <button type="button" data-preset="solar">Priorizar energía solar</button>
+                <button type="button" data-preset="communications">Priorizar comunicaciones</button>
+                <button type="button" data-preset="terrain">Priorizar terreno</button>
+                <button type="button" data-preset="balanced">Equilibrio</button>
+            </div>
+
+            <div class="seleccion-controls">
+                <label for="peso-solar">
+                    Energía solar: <output id="peso-solar-valor">34</output> / 100
+                    (participación efectiva: <output id="peso-solar-normalizado">34%</output>)
+                </label>
+                <input id="peso-solar" type="range" min="0" max="100" value="34">
+                <label for="peso-comunicacion">
+                    Comunicaciones: <output id="peso-comunicacion-valor">33</output> / 100
+                    (participación efectiva: <output id="peso-comunicacion-normalizado">33%</output>)
+                </label>
+                <input id="peso-comunicacion" type="range" min="0" max="100" value="33">
+                <label for="peso-terreno">
+                    Terreno: <output id="peso-terreno-valor">33</output> / 100
+                    (participación efectiva: <output id="peso-terreno-normalizado">33%</output>)
+                </label>
+                <input id="peso-terreno" type="range" min="0" max="100" value="33">
+            </div>
+            <p class="seleccion-weight-note">
+                Los pesos se normalizan automáticamente para sumar 100%.
+                Al mover un control, la clasificación y sus aportes se actualizan
+                inmediatamente después del análisis.
+            </p>
+
+            <div class="seleccion-query-controls">
+                <label for="seleccion-fecha">Fecha de comparación</label>
+                <input id="seleccion-fecha" type="date" value="2026-11-14">
+                <button id="calcular-seleccion" type="button">Analizar y comparar sitios</button>
+            </div>
+            <p id="seleccion-estado" class="seleccion-status" role="status" aria-live="polite">
+                Pulsa «Analizar y comparar sitios» para calcular los indicadores.
+            </p>
+            <div id="seleccion-resultados" class="seleccion-results" aria-live="polite"></div>
+            <p class="seleccion-caveat">
+                La puntuación es una comparación exploratoria, no una recomendación
+                de aterrizaje. La iluminación usa la fracción del ciclo lunar con Sol
+                directo calculada con SPICE y el horizonte del DEM NASA/LOLA, no energía
+                solar recibida ni temperatura;
+                la comunicación estima visibilidad geométrica con SPICE y el relieve
+                NASA/LOLA, no calidad de radio. El terreno resume los DEM regionales;
+                pendiente ≤15° y rugosidad son criterios comparativos, no límites
+                certificados de seguridad.
+            </p>
+        </section>
+
+    </section>
+
+
+    <!-- ==========================================
+         6. VARIABLES DE EVALUACIÓN
+    ========================================== -->
+
+    <section id="analisis" class="section analysis">
+
+        <p class="eyebrow">
+            02 / SCIENTIFIC ANALYSIS
+        </p>
+
+        <h2>Variables de evaluación</h2>
+
+        <p class="section-description">
+            Parámetros considerados para el estudio
+            y comparación de posibles sitios de alunizaje.
+        </p>
+
+
+        <div class="variables">
+
+
+            <div>
+
+                <h3>Energía solar</h3>
+
+                <p>
+                    Disponibilidad de iluminación.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>Comunicación</h3>
+
+                <p>
+                    Visibilidad geométrica de la Tierra.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>Topografía</h3>
+
+                <p>
+                    Elevación y pendiente del terreno.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+<section id="fuentes-archivos" class="section fuentes-archivos">
+    <p class="eyebrow">07 / FUENTES Y ARCHIVOS</p>
+    <h2>Datos, fuentes y kernels SPICE</h2>
+    <p class="fuentes-intro">
+        Aquí se reúnen los GeoTIFF NASA/LOLA utilizados en los análisis y los
+        kernels SPICE necesarios para los cálculos orbitales.
+    </p>
+
+    <div class="fuentes-grid">
+        <article class="fuentes-card">
+            <h3>GeoTIFF globales NASA/PDS/LOLA</h3>
+            <p>
+                Las etiquetas de estos tres archivos indican el conjunto
+                <code>LRO-L-LOLA-4-GDR-V1.0</code>. Están asociados al catálogo
+                NASA/PDS; el registro describe productos cuadriculados del
+                instrumento LOLA.
+            </p>
+            <ul>
+                <li><a href="Data/AVGVISIB_75S_120M_201608.tif" download>AVGVISIB_75S_120M_201608.tif</a></li>
+                <li><a href="Data/AVGVISIB_75S_120M_201608_EARTH.tif" download>AVGVISIB_75S_120M_201608_EARTH.tif</a></li>
+                <li><a href="Data/LPSR_75S_120M_201608.tif" download>LPSR_75S_120M_201608.tif</a></li>
+            </ul>
+            <p>
+                <a href="https://pds.nasa.gov/ds-view/pds/viewDataset.jsp?dsid=LRO-L-LOLA-4-GDR-V1.0"
+                    target="_blank" rel="noopener noreferrer">Registro NASA/PDS</a>
+                · DOI <a href="https://doi.org/10.17189/1520642"
+                    target="_blank" rel="noopener noreferrer">10.17189/1520642</a>.
+            </p>
+        </article>
+
+        <article class="fuentes-card">
+            <h3>DEM regionales NASA/LOLA</h3>
+            <p>
+                Modelos digitales de elevación NASA/LOLA para las regiones de
+                análisis; resolución indicada en los nombres: 5 m/píxel. La app
+                los usa para relieve, pendiente, incertidumbre y horizonte.
+            </p>
+            <details>
+                <summary>Site04 — referencia Shackleton Rim</summary>
+                <ul>
+                    <li><a href="Data/Site04_final_adj_5mpp_surf.tif" download>Site04_final_adj_5mpp_surf.tif</a></li>
+                    <li><a href="Data/Site04_final_adj_5mpp_slp.tif" download>Site04_final_adj_5mpp_slp.tif</a></li>
+                    <li><a href="Data/Site04_final_adj_5mpp_toterr.tif" download>Site04_final_adj_5mpp_toterr.tif</a></li>
+                    <li><a href="Data/Site04_final_adj_5mpp_slperr.tif" download>Site04_final_adj_5mpp_slperr.tif</a></li>
+                </ul>
+            </details>
+            <details>
+                <summary>Site11 — referencia De Gerlache Rim</summary>
+                <ul>
+                    <li><a href="Data/Site11_final_adj_5mpp_surf.tif" download>Site11_final_adj_5mpp_surf.tif</a></li>
+                    <li><a href="Data/Site11_final_adj_5mpp_slp.tif" download>Site11_final_adj_5mpp_slp.tif</a></li>
+                    <li><a href="Data/Site11_final_adj_5mpp_toterr.tif" download>Site11_final_adj_5mpp_toterr.tif</a></li>
+                    <li><a href="Data/Site11_final_adj_5mpp_slperr.tif" download>Site11_final_adj_5mpp_slperr.tif</a></li>
+                </ul>
+            </details>
+            <details>
+                <summary>Site23 — referencia Malapert Massif</summary>
+                <ul>
+                    <li><a href="Data/Site23_final_adj_5mpp_surf.tif" download>Site23_final_adj_5mpp_surf.tif</a></li>
+                    <li><a href="Data/Site23_final_adj_5mpp_slp.tif" download>Site23_final_adj_5mpp_slp.tif</a></li>
+                    <li><a href="Data/Site23_final_adj_5mpp_toterr.tif" download>Site23_final_adj_5mpp_toterr.tif</a></li>
+                    <li><a href="Data/Site23_final_adj_5mpp_slperr.tif" download>Site23_final_adj_5mpp_slperr.tif</a></li>
+                </ul>
+            </details>
+        </article>
+
+        <article class="fuentes-card">
+            <h3>Kernels SPICE de NAIF/JPL</h3>
+            <p>
+                Descargados desde el archivo oficial
+                <a href="https://naif.jpl.nasa.gov/pub/naif/generic_kernels/"
+                    target="_blank" rel="noopener noreferrer">NAIF/JPL Generic Kernels</a>
+                por <code>download_spice_kernels.py</code>.
+            </p>
+            <ul>
+                <li><a href="https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/planets/de440s.bsp"
+                    target="_blank" rel="noopener noreferrer">de440s.bsp</a> — efemérides planetarias y lunares.</li>
+                <li><a href="https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls"
+                    target="_blank" rel="noopener noreferrer">naif0012.tls</a> — segundos intercalares.</li>
+                <li><a href="https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc"
+                    target="_blank" rel="noopener noreferrer">pck00011.tpc</a> — constantes y orientación de cuerpos.</li>
+                <li><a href="https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/moon_pa_de440_200625.bpc"
+                    target="_blank" rel="noopener noreferrer">moon_pa_de440_200625.bpc</a> — orientación lunar.</li>
+                <li><a href="https://naif.jpl.nasa.gov/pub/naif/generic_kernels/fk/satellites/moon_de440_250416.tf"
+                    target="_blank" rel="noopener noreferrer">moon_de440_250416.tf</a> — marcos de referencia lunar.</li>
+            </ul>
+        </article>
+
+        <article class="fuentes-card">
+            <h3>Referencias de regiones y recursos visuales</h3>
+            <ul>
+                <li><a href="https://www.nasa.gov/news-release/la-nasa-identifica-regiones-candidatas-para-un-alunizaje-humano/"
+                    target="_blank" rel="noopener noreferrer">NASA: regiones Artemis III, anuncio de 2022</a>.</li>
+                <li><a href="https://www.nasa.gov/news-release/nasa-provides-update-on-artemis-iii-moon-landing-regions/"
+                    target="_blank" rel="noopener noreferrer">NASA: actualización de regiones, 2024</a>.</li>
+                <li>El mapa de regiones Artemis III enlazado en la página es de NASA.</li>
+                <li>La textura lunar 3D es el archivo de ejemplo <a href="https://threejs.org/examples/textures/planets/moon_1024.jpg"
+                    target="_blank" rel="noopener noreferrer">moon_1024.jpg</a> de Three.js, no un producto científico NASA.</li>
+                <li>El fondo de portada es una imagen decorativa servida por <a href="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa"
+                    target="_blank" rel="noopener noreferrer">Unsplash</a>.</li>
+            </ul>
+        </article>
+    </div>
+</section>
+
+<!-- ==========================================
+     7. PIE DE PÁGINA
+========================================== -->
+
+<footer>
+
+    MEVILLE MOON 2026 |
+    LUNAR LANDING SITE EXPLORER
+
+</footer>
+
+
+<!-- ==========================================
+     8. ARCHIVOS JAVASCRIPT
+========================================== -->
+
+<script type="module" src="script.js"></script>
+
+<script type="module" src="topografia.js"></script>
+<script type="module" src="iluminacion.js"></script>
+<script type="module" src="comunicacion.js"></script>
+<script type="module" src="seleccion.js"></script>
+
+</body>
+
+</html>
