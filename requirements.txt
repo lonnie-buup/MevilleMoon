@@ -3,3 +3,4 @@ numpy>=2.0,<3
 rasterio>=1.4,<2
 spiceypy>=8.0,<9
 gunicorn>=23,<24
+reportlab>=4.2,<5

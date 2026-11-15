@@ -8,6 +8,7 @@ const tableBody = document.getElementById("tabla-iluminacion");
 const tableSummary = document.getElementById("tabla-iluminacion-resumen");
 const tableDetails = document.querySelector(".iluminacion-registros");
 let currentSamples = [];
+let currentResult = null;
 let tableRendered = false;
 
 function escapeHtml(value) {
@@ -84,6 +85,7 @@ function renderHourlyTable() {
 
 function renderResult(data) {
     const durationHours = data.durationDays * 24;
+    currentResult = data;
     document.getElementById("porcentaje-iluminacion").textContent =
         `${data.sunlitPercent}%`;
     document.getElementById("tiempo-iluminado").textContent =
@@ -160,23 +162,44 @@ function clearResults() {
     graph.replaceChildren();
     tableBody.replaceChildren();
     currentSamples = [];
+    currentResult = null;
     tableRendered = false;
 }
 
-function exportarResultadosPDF() {
-    if (exportButton.disabled) return;
-    const previousTitle = document.title;
-    const selectedSite = siteSelect.selectedOptions[0].textContent.trim();
-    document.title =
-        `Meville Moon - Iluminacion solar - ${selectedSite} - ${dateInput.value}`;
-    document.body.classList.add("imprimir-iluminacion");
-
-    window.addEventListener("afterprint", () => {
-        document.body.classList.remove("imprimir-iluminacion");
-        document.title = previousTitle;
-    }, { once: true });
-
-    window.print();
+async function exportarResultadosPDF() {
+    if (exportButton.disabled || !currentResult) return;
+    const originalText = exportButton.textContent;
+    exportButton.disabled = true;
+    exportButton.textContent = "Generando PDF...";
+    try {
+        const response = await fetch("/api/illumination/pdf", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(currentResult)
+        });
+        if (!response.ok) {
+            const data = await response.json();
+            throw new Error(data.error || "No se pudo generar el PDF.");
+        }
+        const pdf = await response.blob();
+        const url = URL.createObjectURL(pdf);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download =
+            `Meville-Moon-iluminacion-${currentResult.siteKey}-${currentResult.startUtc.slice(0, 10)}.pdf`;
+        document.body.append(link);
+        link.click();
+        link.remove();
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (error) {
+        const message = document.createElement("p");
+        message.setAttribute("role", "alert");
+        message.textContent = `No se pudo descargar el PDF: ${error.message}`;
+        resultPanel.append(message);
+    } finally {
+        exportButton.disabled = false;
+        exportButton.textContent = originalText;
+    }
 }
 
 if (calculateButton) {

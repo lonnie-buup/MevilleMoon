@@ -113,6 +113,36 @@ class CommunicationSimulatorTests(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn("sitio válido", response.get_json()["error"])
 
+    def test_solar_illumination_pdf_is_downloadable(self):
+        analysis = self.client.post(
+            "/api/illumination/analyze",
+            json={
+                "site": "shackleton",
+                "startUtc": "2026-11-14T00:00:00Z",
+            },
+        )
+        self.assertEqual(analysis.status_code, 200, analysis.get_json())
+
+        response = self.client.post(
+            "/api/illumination/pdf",
+            json=analysis.get_json(),
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.mimetype, "application/pdf")
+        self.assertIn("attachment;", response.headers["Content-Disposition"])
+        self.assertGreater(len(response.data), 10_000)
+        self.assertTrue(response.data.startswith(b"%PDF-"))
+
+    def test_solar_illumination_pdf_rejects_invalid_results(self):
+        response = self.client.post(
+            "/api/illumination/pdf",
+            json={"site": "Shackleton Rim", "samples": []},
+        )
+
+        self.assertEqual(response.status_code, 400)
+        self.assertIn("formato válido", response.get_json()["error"])
+
     def test_point_outside_selected_dem_is_rejected(self):
         response = self.client.post(
             "/api/communications/analyze",

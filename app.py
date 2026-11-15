@@ -1,11 +1,13 @@
+from io import BytesIO
 from pathlib import Path
 
-from flask import Flask, abort, jsonify, request, send_from_directory
+from flask import Flask, abort, jsonify, request, send_file, send_from_directory
 
 import rasterio
 import spiceypy as spice
 
 from comunicacion import analyze_request, analyze_solar_illumination, kernel_status
+from informe_pdf import build_solar_illumination_pdf
 from seleccion import terrain_comparison
 
 
@@ -71,6 +73,23 @@ def illumination_analyze():
         return jsonify({"error": f"Error de cálculo SPICE: {error}"}), 503
     except rasterio.errors.RasterioError as error:
         return jsonify({"error": f"No se pudo leer el DEM NASA/LOLA: {error}"}), 503
+
+
+@app.post("/api/illumination/pdf")
+def illumination_pdf():
+    payload = request.get_json(silent=True)
+    if not isinstance(payload, dict):
+        return jsonify({"error": "Se esperaba un objeto JSON."}), 400
+    try:
+        pdf = build_solar_illumination_pdf(payload)
+    except ValueError as error:
+        return jsonify({"error": str(error)}), 400
+    return send_file(
+        BytesIO(pdf),
+        mimetype="application/pdf",
+        as_attachment=True,
+        download_name="meville-moon-iluminacion.pdf",
+    )
 
 
 @app.get("/api/selection/terrain")
